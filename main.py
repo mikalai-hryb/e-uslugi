@@ -2,7 +2,7 @@ import concurrent.futures
 import requests
 import sys
 
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 # https://www.e-uslugi.mazowieckie.pl/delegate/services/guest/subjects/176/timeframes/2024-01-30/next/date
 URL_TEMPLATE = 'https://www.e-uslugi.mazowieckie.pl/delegate/services/guest/subjects/176/timeframes/{date}/next/date'
@@ -40,7 +40,7 @@ def fetch_url(url):
 def send_message(chat_id, bot_token, message="hello"):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage?parse_mode=HTML&chat_id={chat_id}&text={message}"
     print(url)
-    print(requests.get(url).json()) # this sends the message
+    print(requests.get(url).json())  # this sends the message
 
 
 if __name__ == "__main__":
@@ -68,3 +68,5 @@ if __name__ == "__main__":
     if len(messages) > 1:
         print('sending a message')
         send_message(chat_id, bot_token, '\n'.join(messages))
+
+    print(datetime.now())
